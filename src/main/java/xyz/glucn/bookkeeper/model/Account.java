@@ -24,11 +24,9 @@ enum AccountSubType {
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Account {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(updatable = false, nullable = false)
     private Integer id;
 
     @NotEmpty(message = "name cannot be empty")

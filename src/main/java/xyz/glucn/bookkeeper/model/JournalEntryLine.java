@@ -1,16 +1,22 @@
 package xyz.glucn.bookkeeper.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 enum JournalEntryLineType {
-    CREDIT, DEBIT;
+    CREDIT, DEBIT
 }
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class JournalEntryLine {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false, nullable = false)
     private Integer id;
 
     private JournalEntryLineType type;
@@ -19,8 +25,12 @@ public class JournalEntryLine {
     private BigDecimal amount;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "parentEntry", nullable = false)
+    @JoinColumn(name = "parentId", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private JournalEntry parentEntry;
+
+    @CreatedDate
+    private Long createdAt;
 
     public Integer getId() {
         return id;

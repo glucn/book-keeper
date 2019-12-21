@@ -19,7 +19,7 @@ public class AccountController {
     private AccountServiceInterface accountService;
 
     @PostMapping("/")
-    public ResponseEntity<Account> create(@Valid @RequestBody Account account) throws URISyntaxException {
+    public ResponseEntity<Account> create(@Valid @RequestBody Account account) {
 
         Account createdAccount = accountService.create(account);
 

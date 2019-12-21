@@ -1,4 +1,4 @@
-package xyz.glucn.bookkeeper.bookkeeper;
+package xyz.glucn.bookkeeper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

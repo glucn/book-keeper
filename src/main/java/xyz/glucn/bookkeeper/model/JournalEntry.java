@@ -1,28 +1,36 @@
 package xyz.glucn.bookkeeper.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class JournalEntry {
-
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", updatable = false, nullable = false)
   private Integer id;
 
   private Date transactionDate;
   private Date postingDate;
   private String currencyId;
 
-  @OneToMany(mappedBy="parentEntry", cascade = CascadeType.PERSIST)
+  @OneToMany(mappedBy="parentEntry", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
   private List<JournalEntryLine> lines = new ArrayList<>();
+
+  @CreatedDate
+  private Long createdAt;
+
+  public JournalEntry(Date transactionDate, Date postingDate, String currencyId) {
+    this.transactionDate = transactionDate;
+    this.postingDate = postingDate;
+    this.currencyId = currencyId;
+  }
 
   public Integer getId() {
     return id;

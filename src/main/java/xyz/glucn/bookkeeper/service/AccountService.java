@@ -2,10 +2,10 @@ package xyz.glucn.bookkeeper.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.glucn.bookkeeper.model.Account;
 import xyz.glucn.bookkeeper.repository.AccountRepository;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
