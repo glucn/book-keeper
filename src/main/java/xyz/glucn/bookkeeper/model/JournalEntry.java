@@ -11,64 +11,67 @@ import java.util.List;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class JournalEntry {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
+    private Integer id;
 
-  private Date transactionDate;
-  private Date postingDate;
-  private String currencyId;
+    private Date transactionDate;
+    private Date postingDate;
+    private String currencyId;
 
-  @OneToMany(mappedBy="parentEntry", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
-  private List<JournalEntryLine> lines = new ArrayList<>();
+    @OneToMany(mappedBy = "parentEntry", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private List<JournalEntryLine> lines = new ArrayList<>();
 
-  @CreatedDate
-  private Long createdAt;
+    @CreatedDate
+    private Long createdAt;
 
-  public JournalEntry(Date transactionDate, Date postingDate, String currencyId) {
-    this.transactionDate = transactionDate;
-    this.postingDate = postingDate;
-    this.currencyId = currencyId;
-  }
+    public JournalEntry() {
+    }
 
-  public Integer getId() {
-    return id;
-  }
+    public JournalEntry(Date transactionDate, Date postingDate, String currencyId) {
+        this.transactionDate = transactionDate;
+        this.postingDate = postingDate;
+        this.currencyId = currencyId;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public Date getTransactionDate() {
-    return transactionDate;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public void setTransactionDate(Date transactionDate) {
-    this.transactionDate = transactionDate;
-  }
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
 
-  public Date getPostingDate() {
-    return postingDate;
-  }
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
 
-  public void setPostingDate(Date postingDate) {
-    this.postingDate = postingDate;
-  }
+    public Date getPostingDate() {
+        return postingDate;
+    }
 
-  public String getCurrencyId() {
-    return currencyId;
-  }
+    public void setPostingDate(Date postingDate) {
+        this.postingDate = postingDate;
+    }
 
-  public void setCurrencyId(String currencyId) {
-    this.currencyId = currencyId;
-  }
+    public String getCurrencyId() {
+        return currencyId;
+    }
 
-  public List<JournalEntryLine> getLines() {
-    return lines;
-  }
+    public void setCurrencyId(String currencyId) {
+        this.currencyId = currencyId;
+    }
 
-  public void setLines(List<JournalEntryLine> lines) {
-    this.lines = lines;
-  }
+    public List<JournalEntryLine> getLines() {
+        return lines;
+    }
+
+    public void setLines(List<JournalEntryLine> lines) {
+        this.lines = lines;
+    }
 }

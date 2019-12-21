@@ -24,7 +24,7 @@ public class JournalEntryLine {
     private String description;
     private BigDecimal amount;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parentId", referencedColumnName = "id", nullable = false)
     @JsonIgnore
     private JournalEntry parentEntry;

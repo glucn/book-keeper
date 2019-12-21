@@ -9,7 +9,6 @@ import xyz.glucn.bookkeeper.service.AccountServiceInterface;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
@@ -40,11 +39,9 @@ public class AccountController {
 
         Optional<Account> account = accountService.get(id);
 
-        if (account.isEmpty()) {
-            // TODO: return correct error code
-            return ResponseEntity.notFound().build();
-        }
+        // TODO: return correct error code
+        return account.map(acc -> ResponseEntity.ok().body(acc))
+                .orElseGet(() -> ResponseEntity.notFound().build());
 
-        return ResponseEntity.ok().body(account.get());
     }
 }

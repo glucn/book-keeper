@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Integer> {
-    public Optional<Account> findByNumber(String number);
+    Optional<Account> findByNumber(String number);
 }

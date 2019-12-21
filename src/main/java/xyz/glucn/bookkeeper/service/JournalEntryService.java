@@ -8,6 +8,8 @@ import xyz.glucn.bookkeeper.model.JournalEntryLine;
 import xyz.glucn.bookkeeper.repository.JournalEntryLineRepository;
 import xyz.glucn.bookkeeper.repository.JournalEntryRepository;
 
+import java.util.Optional;
+
 @Service
 public class JournalEntryService implements JournalEntryServiceInterface {
     @Autowired
@@ -22,13 +24,18 @@ public class JournalEntryService implements JournalEntryServiceInterface {
 
         JournalEntry created = journalEntryRepository.save(new JournalEntry(entry.getTransactionDate(), entry.getPostingDate(), entry.getCurrencyId()));
 
-        for (JournalEntryLine line: entry.getLines()) {
+        for (JournalEntryLine line : entry.getLines()) {
             line.setParentEntry(created);
             journalEntryLineRepository.save(line);
         }
 
         created.setLines(entry.getLines());
         return created;
+    }
+
+    @Override
+    public Optional<JournalEntry> get(Integer id) {
+        return journalEntryRepository.findById(id);
     }
 
 }
