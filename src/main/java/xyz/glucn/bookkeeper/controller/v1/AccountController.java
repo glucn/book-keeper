@@ -34,6 +34,15 @@ public class AccountController {
         return ResponseEntity.created(uri).body(createdAccount);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<Iterable<Account>> list() {
+
+        Iterable<Account> accounts = accountService.findAll();
+
+        // TODO: return correct error code
+        return ResponseEntity.ok().body(accounts);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Account> get(@PathVariable("id") Integer id) {
 

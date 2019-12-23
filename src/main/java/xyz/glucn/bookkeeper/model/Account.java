@@ -1,5 +1,6 @@
 package xyz.glucn.bookkeeper.model;
 
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -21,11 +22,12 @@ enum AccountSubType {
     Unset
 }
 
+@Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private Integer id;
 
@@ -43,85 +45,4 @@ public class Account {
     private Date openedAt;
     @CreatedDate
     private Long createdAt;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getCurrencyId() {
-        return currencyId;
-    }
-
-    public void setCurrencyId(String currencyId) {
-        this.currencyId = currencyId;
-    }
-
-    public AccountClassification getClassification() {
-        return classification;
-    }
-
-    public void setClassification(AccountClassification classification) {
-        this.classification = classification;
-    }
-
-    public AccountType getType() {
-        return type;
-    }
-
-    public void setType(AccountType type) {
-        this.type = type;
-    }
-
-    public AccountSubType getSubType() {
-        return subType;
-    }
-
-    public void setSubType(AccountSubType subType) {
-        this.subType = subType;
-    }
-
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
-
-    public Date getOpenedAt() {
-        return openedAt;
-    }
-
-    public void setOpenedAt(Date openedAt) {
-        this.openedAt = openedAt;
-    }
-
-    public Long getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Long createdAt) {
-        this.createdAt = createdAt;
-    }
 }

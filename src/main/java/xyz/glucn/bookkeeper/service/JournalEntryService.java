@@ -20,7 +20,8 @@ public class JournalEntryService implements JournalEntryServiceInterface {
     @Override
     @Transactional
     public JournalEntry create(JournalEntry entry) {
-        // TODO: validate
+        // TODO: validate if accounts exist
+        // TODO: validate if there are more than 2 lines and they are in balance
 
         JournalEntry created = journalEntryRepository.save(new JournalEntry(entry.getTransactionDate(), entry.getPostingDate(), entry.getCurrencyId()));
 

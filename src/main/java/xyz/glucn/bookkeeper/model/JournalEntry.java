@@ -1,5 +1,7 @@
 package xyz.glucn.bookkeeper.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -8,6 +10,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class JournalEntry {
@@ -26,52 +30,9 @@ public class JournalEntry {
     @CreatedDate
     private Long createdAt;
 
-    public JournalEntry() {
-    }
-
     public JournalEntry(Date transactionDate, Date postingDate, String currencyId) {
         this.transactionDate = transactionDate;
         this.postingDate = postingDate;
         this.currencyId = currencyId;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(Date transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
-    public Date getPostingDate() {
-        return postingDate;
-    }
-
-    public void setPostingDate(Date postingDate) {
-        this.postingDate = postingDate;
-    }
-
-    public String getCurrencyId() {
-        return currencyId;
-    }
-
-    public void setCurrencyId(String currencyId) {
-        this.currencyId = currencyId;
-    }
-
-    public List<JournalEntryLine> getLines() {
-        return lines;
-    }
-
-    public void setLines(List<JournalEntryLine> lines) {
-        this.lines = lines;
     }
 }
